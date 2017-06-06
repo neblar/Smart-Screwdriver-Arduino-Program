@@ -2,7 +2,8 @@ void setup()
 {
     initLogger();
     initBluetooth();
-    initMotorDriver();
+    initMotorDriver(); 
+    initScrewDriver();
     setMotorPorts(2);
     setMotorMode('x',0);
     setMotorMode('y',0);

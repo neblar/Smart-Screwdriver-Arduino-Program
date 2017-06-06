@@ -28,20 +28,12 @@ unsigned long ySteps = 0;
 
 unsigned int masterClock = VARIANT_MCK;
 
-
-void first(){
-      stepMotor('x',true,480);
-      TC_Stop(TC0,1);
-      ySteps=0;
-}
-
-void second(){
-      stepMotor('y',false,480);
-      TC_Stop(TC0,0);
-      xSteps=0;
-  
-}
-
+/**
+ * getMotorStatus
+ * Reads all the pins of the motor driver
+ * and returns a compiled result as a string
+ * @return String motor driver status
+ */
 String getMotorStatus(){
   String log2 = "xEnable:"+String(digitalRead(pin_xEnable),DEC);
     log2 += " :: yEnable:"+String(digitalRead(pin_yEnable),DEC);
@@ -63,11 +55,6 @@ String getMotorStatus(){
     log2 += " :: ySteps:"+String(ySteps,DEC);
 
     return log2;
-}
-
-void MotorStatus(){
-    if(xSteps<1 || ySteps<1) return;    
-    log("MotorDriver.status",getMotorStatus());
 }
 
 /**
@@ -98,6 +85,16 @@ void initMotorDriver(){
   TC0->TC_CHANNEL[1].TC_IER = TC_IER_CPCS;
   NVIC_EnableIRQ(TC0_IRQn);
   NVIC_EnableIRQ(TC1_IRQn);
+}
+
+/**
+ * MotorStatus
+ * logs the motor status as long as the 
+ * motors are running
+ */
+void MotorStatus(){
+    if(xSteps<1 || ySteps<1) return;    
+    log("MotorDriver.status",getMotorStatus());
 }
 
 /*
@@ -281,6 +278,17 @@ void stepMotor(char port, bool direction, unsigned long steps){
             ySteps--;       
          }
 
+
+/**
+ * stopAllMotors
+ * stops both the motor ports
+ */
+void stopAllMotors(){
+      TC_Stop(TC0,1);
+      TC_Stop(TC0,0);
+      xSteps=0;
+      ySteps=0;
+}
 
 /**
  * wakePort

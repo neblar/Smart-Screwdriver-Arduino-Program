@@ -86,21 +86,34 @@ void getBluetoothCommand(){
                 }
                 log(TAG,"Manual Control"); 
                 break;
-      case 'H': 
+      case 'S': 
                 {
-                  first();
                   log(TAG,"Starting");
+                  screw();
                 }
                 break;
-      case 'B':
+      case 'Q':
                 {
+                  stopAllMotors();
+                  stopAllScrewDrivers();
                   log(TAG,"Ending");
                 }
                 break;
-      case 'g':
+      case 'F':
                 {
+                  tighten();
                   sendBluetoothData("Feedback");
-                  second();
+                }
+                break;
+      case 'T':
+                {
+                  tighten();
+                }
+                break;
+      case 'L':
+                {
+                  loosen();
+                  
                 }
                 break;
     }
