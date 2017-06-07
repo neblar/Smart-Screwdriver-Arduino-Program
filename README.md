@@ -21,6 +21,7 @@
 You can check out my version of the project at https://www.youtube.com/watch?v=kUv5TsbPHqY
 
 The hardware was made up of plastic sheet that I obtained from a container/box, along with a 3D printed rack and pinion. The components that were used in this implementation are:
+
 * Arduino Due
 * SEEED Bluetooth Shield
 * ITEAD Dual Motor Driver (https://littlebirdelectronics.com.au/products/itead-dual-step-motor-driver-shield)
